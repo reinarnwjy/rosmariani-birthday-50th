@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 50th Birthday of Ros Mariani</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        :root {
+            --bg-dark: #0a1128;
+            --bg-light: #1c2541;
+            --gold: #d4af37;
+            --gold-gradient: linear-gradient(45deg, #b38728, #fbf5b7, #daa520, #fbf5b7, #aa771c);
+            --silver: #e0e0e0;
+            --text-light: #ffffff;
+            --text-muted: #a5a5a5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        h1, h2, h3, .gala-title {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+        }
+
+        .cursive {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--silver);
+        }
+
+        /* Hero / Cover Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: radial-gradient(circle, var(--bg-light) 0%, var(--bg-dark) 100%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://www.transparenttextures.com/patterns/dark-matter.png'); /* Efek glitter halus */
+            opacity: 0.3;
+        }
+
+        .gold-text {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .hero h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--silver);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin: 15px 0;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            max-width: 500px;
+            color: var(--text-muted);
+        }
+
+        /* Section Umum */
+        section {
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .divider {
+            height: 2px;
+            width: 80px;
+            background: var(--gold-gradient);
+            margin: 25px auto;
+        }
+
+        /* Acara / Event Details */
+        .event-card {
+            background: rgba(28, 37, 65, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            padding: 40px 20px;
+            backdrop-filter: blur(10px);
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .event-details {
+            margin: 20px 0;
+            font-size: 1.1rem;
+        }
+
+        .event-details strong {
+            color: var(--gold);
+            display: block;
+            margin-bottom: 5px;
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Dress Code */
+        .dress-code {
+            background: var(--bg-light);
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        .dress-colors {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .color-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+        .c-blue { background-color: #0f2027; border-color: var(--silver); }
+        .c-silver { background-color: #e0e0e0; border-color: var(--gold); }
+        .c-neutral { background-color: #dfd5c6; border-color: var(--silver); }
+
+        /* RSVP Form */
+        .rsvp-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 400px;
+            margin: 30px auto 0;
+        }
+
+        input, select, textarea {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            background: rgba(10, 17, 40, 0.8);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background: var(--gold-gradient);
+            border: none;
+            border-radius: 25px;
+            color: #000;
+            font-weight: 600;
+            font-family: 'Cinzel', serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+        }
+
+        footer {
+            padding: 40px 20px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Responsive scaling */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.2rem; }
+            section { padding: 60px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h2 class="animate__animated animate__fadeInDown">THE GALA CELEBRATION</h2>
+        <h1 class="gold-text animate__animated animate__fadeInUp animate__delay-1s">50 Years of Love, Grace & Beautiful Memories</h1>
+        <div class="divider animate__animated animate__zoomIn animate__delay-2s"></div>
+        <p class="cursive animate__animated animate__fadeIn animate__delay-2s">The Golden Jubilee of Ros Mariani</p>
+    </header>
+
+    <section>
+        <p class="cursive">Together with our family,</p>
+        <p style="margin-top: 10px; color: var(--text-muted);">we cordially invite you to celebrate the luxury milestone of</p>
+        <h2 class="gold-text" style="font-size: 2.5rem; margin: 20px 0;">Ros Mariani</h2>
+        <p>To a night filled with gratitude, sophisticated melodies, and wonderful company.</p>
+    </section>
+
+    <section style="background: rgba(255,255,255,0.02);">
+        <h2 class="gold-text">Date & Time</h2>
+        <div class="divider"></div>
+        
+        <div class="event-card">
+            <div class="event-details">
+                <strong>Tanggal</strong>
+                Kamis, 4 Juni 2026
+            </div>
+            <div class="event-details">
+                <strong>Waktu</strong>
+                10.30 – 14.00 WIB
+            </div>
+            <div class="event-details">
+                <strong>Tempat</strong>
+                Temu Degayu Villa<br>Bogor Indah
+            </div>
+            
+            <a href="https://maps.google.com" target="_blank">
+                <button class="btn" style="margin-top: 15px; font-size: 0.8rem;">Petunjuk Lokasi (Maps)</button>
+            </a>
+        </div>
+    </section>
+
+    <section>
+        <div class="dress-code">
+            <h3 class="gold-text">Dress Code</h3>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: var(--silver);">Elegant in Royal Blue, Silver, or Neutral Tones</p>
+            <div class="dress-colors">
+                <div class="color-circle c-blue"></div>
+                <div class="color-circle c-silver"></div>
+                <div class="color-circle c-neutral"></div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="gold-text">RSVP</h2>
+        <p class="cursive" style="margin-top: 5px;">Mohon konfirmasi kehadiran Anda</p>
+        <div class="divider"></div>
+
+        <form class="rsvp-form" id="rsvpForm">
+            <input type="text" placeholder="Nama Lengkap" required>
+            <select required>
+                <option value="" disabled selected>Konfirmasi Kehadiran</option>
+                <option value="hadir">Hadir</option>
+                <option value="tidak_hadir">Sangat Menyesal, Tidak Bisa Hadir</option>
+            </select>
+            <input type="number" placeholder="Jumlah Tamu (Maks. 2)" min="1" max="2">
+            <textarea placeholder="Ucapan & Doa Baik" rows="4"></textarea>
+            <button type="submit" class="btn">Kirim Konfirmasi</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>"Your presence will be the greatest gift for this special day."</p>
+        <p style="margin-top: 20px; opacity: 0.5;">© 2026 Ros Mariani Birthday Committee.</p>
+    </footer>
+
+    <script>
+        // Efek RSVP sederhana (Bisa dihubungkan ke WhatsApp atau Google Sheets)
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Terima kasih! Konfirmasi kehadiran Anda telah tersimpan.');
+        });
+    </script>
+</body>
+</html>
