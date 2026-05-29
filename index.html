@@ -59,7 +59,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: url('https://www.transparenttextures.com/patterns/dark-matter.png'); /* Efek glitter halus */
+            background: url('https://www.transparenttextures.com/patterns/dark-matter.png');
             opacity: 0.3;
         }
 
@@ -80,12 +80,6 @@
             font-size: 3rem;
             margin: 15px 0;
             line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1rem;
-            max-width: 500px;
-            color: var(--text-muted);
         }
 
         /* Section Umum */
@@ -144,11 +138,11 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            border: 2px solid white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
         }
-        .c-blue { background-color: #0f2027; border-color: var(--silver); }
-        .c-silver { background-color: #e0e0e0; border-color: var(--gold); }
-        .c-neutral { background-color: #dfd5c6; border-color: var(--silver); }
+        .c-silver { background-color: #e0e0e0; }
+        .c-lightgray { background-color: #d3d3d3; }
+        .c-white { background-color: #ffffff; }
 
         /* RSVP Form */
         .rsvp-form {
@@ -198,7 +192,6 @@
             border-top: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* Responsive scaling */
         @media (max-width: 600px) {
             .hero h1 { font-size: 2.2rem; }
             section { padding: 60px 15px; }
@@ -239,7 +232,7 @@
                 Temu Degayu Villa<br>Bogor Indah
             </div>
             
-            <a href="https://maps.google.com" target="_blank">
+            <a href="https://maps.app.goo.gl/6Fm4xSAgqPekBm7F6" target="_blank">
                 <button class="btn" style="margin-top: 15px; font-size: 0.8rem;">Petunjuk Lokasi (Maps)</button>
             </a>
         </div>
@@ -248,11 +241,11 @@
     <section>
         <div class="dress-code">
             <h3 class="gold-text">Dress Code</h3>
-            <p style="margin-top: 10px; font-size: 0.9rem; color: var(--silver);">Elegant in Royal Blue, Silver, or Neutral Tones</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: var(--silver);">Elegant in Silver, Abu Muda, or Putih</p>
             <div class="dress-colors">
-                <div class="color-circle c-blue"></div>
-                <div class="color-circle c-silver"></div>
-                <div class="color-circle c-neutral"></div>
+                <div class="color-circle c-silver" title="Silver"></div>
+                <div class="color-circle c-lightgray" title="Abu Muda"></div>
+                <div class="color-circle c-white" title="Putih"></div>
             </div>
         </div>
     </section>
@@ -266,8 +259,8 @@
             <input type="text" placeholder="Nama Lengkap" required>
             <select required>
                 <option value="" disabled selected>Konfirmasi Kehadiran</option>
-                <option value="hadir">Hadir</option>
-                <option value="tidak_hadir">Sangat Menyesal, Tidak Bisa Hadir</option>
+                <option value="Hadir">Hadir</option>
+                <option value="Tidak Hadir">Sangat Menyesal, Tidak Bisa Hadir</option>
             </select>
             <input type="number" placeholder="Jumlah Tamu (Maks. 2)" min="1" max="2">
             <textarea placeholder="Ucapan & Doa Baik" rows="4"></textarea>
@@ -281,10 +274,42 @@
     </footer>
 
     <script>
-        // Efek RSVP sederhana (Bisa dihubungkan ke WhatsApp atau Google Sheets)
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Terima kasih! Konfirmasi kehadiran Anda telah tersimpan.');
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = "Mengirim...";
+            submitBtn.disabled = true;
+
+            // Menggunakan URL Google Apps Script milikmu
+            const urlBersih = 'https://script.google.com/macros/s/AKfycbz68Mi_aCuGcHeaYw1DJLf8AEOF8LgaOXj2qD-bHZgY5W5d5ZSuMOL_jRmmqO13gKQD0Q/exec';
+            
+            const formData = new URLSearchParams();
+            formData.append('Nama', this.querySelector('input[type="text"]').value);
+            formData.append('Kehadiran', this.querySelector('select').value);
+            formData.append('Jumlah_Tamu', this.querySelector('input[type="number"]').value || 0);
+            formData.append('Ucapan', this.querySelector('textarea').value);
+
+            fetch(urlBersih, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .then(response => {
+                alert('Terima kasih! Konfirmasi kehadiran Anda telah tersimpan di Google Sheets.');
+                document.getElementById('rsvpForm').reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Maaf, terjadi kesalahan saat mengirim data. Silakan coba lagi.');
+            })
+            .finally(() => {
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            });
         });
     </script>
 </body>
