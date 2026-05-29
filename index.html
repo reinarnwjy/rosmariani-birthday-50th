@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The 50th Birthday of Ros Mariani</title>
+    <title>The 50th Birthday of Rosmariani</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     
@@ -141,7 +141,7 @@
             border: 2px solid rgba(255, 255, 255, 0.5);
         }
         .c-silver { background-color: #e0e0e0; }
-        .c-blue { background-color: #4169e1; } /* Royal Blue / Sapphire Blue Accent */
+        .c-blue { background-color: #4169e1; }
         .c-white { background-color: #ffffff; }
 
         /* RSVP Form */
@@ -153,7 +153,7 @@
             margin: 30px auto 0;
         }
 
-        input, select, textarea {
+        input, select {
             padding: 12px;
             border-radius: 8px;
             border: 1px solid rgba(212, 175, 55, 0.5);
@@ -204,112 +204,5 @@
         <h2 class="animate__animated animate__fadeInDown">THE GALA CELEBRATION</h2>
         <h1 class="gold-text animate__animated animate__fadeInUp animate__delay-1s">50 Years of Love, Grace & Beautiful Memories</h1>
         <div class="divider animate__animated animate__zoomIn animate__delay-2s"></div>
-        <p class="cursive animate__animated animate__fadeIn animate__delay-2s">The Golden Jubilee of Ros Mariani</p>
+        <p class="cursive animate__animated animate__fadeIn animate__delay-2s">The Golden Jubilee of Rosmariani</p>
     </header>
-
-    <section>
-        <p class="cursive">Together with our family,</p>
-        <p style="margin-top: 10px; color: var(--text-muted);">we cordially invite you to celebrate the luxury milestone of</p>
-        <h2 class="gold-text" style="font-size: 2.5rem; margin: 20px 0;">Ros Mariani</h2>
-        <p>To a night filled with gratitude, sophisticated melodies, and wonderful company.</p>
-    </section>
-
-    <section style="background: rgba(255,255,255,0.02);">
-        <h2 class="gold-text">Date & Time</h2>
-        <div class="divider"></div>
-        
-        <div class="event-card">
-            <div class="event-details">
-                <strong>Tanggal</strong>
-                Kamis, 4 Juni 2026
-            </div>
-            <div class="event-details">
-                <strong>Waktu</strong>
-                10.30 – 14.00 WIB
-            </div>
-            <div class="event-details">
-                <strong>Tempat</strong>
-                Temu Degayu Villa<br>Bogor Indah
-            </div>
-            
-            <a href="https://maps.app.goo.gl/6Fm4xSAgqPekBm7F6" target="_blank">
-                <button class="btn" style="margin-top: 15px; font-size: 0.8rem;">Petunjuk Lokasi (Maps)</button>
-            </a>
-        </div>
-    </section>
-
-    <section>
-        <div class="dress-code">
-            <h3 class="gold-text">Dress Code</h3>
-            <p style="margin-top: 10px; font-size: 0.9rem; color: var(--silver);">Elegant in Silver, Blue, or White</p>
-            <div class="dress-colors">
-                <div class="color-circle c-silver" title="Silver"></div>
-                <div class="color-circle c-blue" title="Blue"></div>
-                <div class="color-circle c-white" title="White"></div>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <h2 class="gold-text">RSVP</h2>
-        <p class="cursive" style="margin-top: 5px;">Mohon konfirmasi kehadiran Anda</p>
-        <div class="divider"></div>
-
-        <form class="rsvp-form" id="rsvpForm">
-            <input type="text" placeholder="Nama Lengkap" required>
-            <select required>
-                <option value="" disabled selected>Konfirmasi Kehadiran</option>
-                <option value="Hadir">Hadir</option>
-                <option value="Tidak Hadir">Sangat Menyesal, Tidak Bisa Hadir</option>
-            </select>
-            <input type="number" placeholder="Jumlah Tamu (Maks. 2)" min="1" max="2">
-            <textarea placeholder="Ucapan & Doa Baik" rows="4"></textarea>
-            <button type="submit" class="btn">Kirim Konfirmasi</button>
-        </form>
-    </section>
-
-    <footer>
-        <p>"Your presence will be the greatest gift for this special day."</p>
-        <p style="margin-top: 20px; opacity: 0.5;">© 2026 Ros Mariani Birthday Committee.</p>
-    </footer>
-
-    <script>
-        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalBtnText = submitBtn.innerText;
-            submitBtn.innerText = "Mengirim...";
-            submitBtn.disabled = true;
-
-            const urlBersih = 'https://script.google.com/macros/s/AKfycbz68Mi_aCuGcHeaYw1DJLf8AEOF8LgaOXj2qD-bHZgY5W5d5ZSuMOL_jRmmqO13gKQD0Q/exec';
-            
-            const formData = new URLSearchParams();
-            formData.append('Nama', this.querySelector('input[type="text"]').value);
-            formData.append('Kehadiran', this.querySelector('select').value);
-            formData.append('Jumlah_Tamu', this.querySelector('input[type="number"]').value || 0);
-            formData.append('Ucapan', this.querySelector('textarea').value);
-
-            fetch(urlBersih, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            })
-            .then(response => {
-                alert('Terima kasih! Konfirmasi kehadiran Anda telah tersimpan di Google Sheets.');
-                document.getElementById('rsvpForm').reset();
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Maaf, terjadi kesalahan saat mengirim data. Silakan coba lagi.');
-            })
-            .finally(() => {
-                submitBtn.innerText = originalBtnText;
-                submitBtn.disabled = false;
-            });
-        });
-    </script>
-</body>
-</html>
