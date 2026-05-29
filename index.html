@@ -206,3 +206,109 @@
         <div class="divider animate__animated animate__zoomIn animate__delay-2s"></div>
         <p class="cursive animate__animated animate__fadeIn animate__delay-2s">The Golden Jubilee of Rosmariani</p>
     </header>
+
+    <section>
+        <p class="cursive">Together with our family,</p>
+        <p style="margin-top: 10px; color: var(--text-muted);">we cordially invite you to celebrate the luxury milestone of</p>
+        <h2 class="gold-text" style="font-size: 2.5rem; margin: 20px 0;">Rosmariani</h2>
+        <p>To a night filled with gratitude, sophisticated melodies, and wonderful company.</p>
+    </section>
+
+    <section style="background: rgba(255,255,255,0.02);">
+        <h2 class="gold-text">Date & Time</h2>
+        <div class="divider"></div>
+        
+        <div class="event-card">
+            <div class="event-details">
+                <strong>Tanggal</strong>
+                Jumat, 5 Juni 2026
+            </div>
+            <div class="event-details">
+                <strong>Waktu</strong>
+                10.30 – 14.00 WIB
+            </div>
+            <div class="event-details">
+                <strong>Tempat</strong>
+                Temu Degayu Villa<br>Bogor Indah
+            </div>
+            
+            <a href="https://maps.app.goo.gl/6Fm4xSAgqPekBm7F6" target="_blank">
+                <button class="btn" style="margin-top: 15px; font-size: 0.8rem;">Petunjuk Lokasi (Maps)</button>
+            </a>
+        </div>
+    </section>
+
+    <section>
+        <div class="dress-code">
+            <h3 class="gold-text">Dress Code</h3>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: var(--silver);">Elegant in Silver, Blue, or White</p>
+            <div class="dress-colors">
+                <div class="color-circle c-silver" title="Silver"></div>
+                <div class="color-circle c-blue" title="Blue"></div>
+                <div class="color-circle c-white" title="White"></div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="gold-text">RSVP</h2>
+        <p class="cursive" style="margin-top: 5px;">Mohon konfirmasi kehadiran Anda</p>
+        <div class="divider"></div>
+
+        <form class="rsvp-form" id="rsvpForm">
+            <input type="text" placeholder="Nama Lengkap" required>
+            <select required>
+                <option value="" disabled selected>Konfirmasi Kehadiran</option>
+                <option value="Hadir">Hadir</option>
+                <option value="Tidak Hadir">Sangat Menyesal, Tidak Bisa Hadir</option>
+            </select>
+            <button type="submit" class="btn">Kirim Konfirmasi</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>"Your presence will be the greatest gift for this special day."</p>
+        <p style="margin-top: 20px; opacity: 0.5;">© 2026 Rosmariani Birthday Committee.</p>
+    </footer>
+
+    <script>
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = "Mengirim...";
+            submitBtn.disabled = true;
+
+            const urlBersih = 'https://script.google.com/macros/s/AKfycbz68Mi_aCuGcHeaYw1DJLf8AEOF8LgaOXj2qD-bHZgY5W5d5ZSuMOL_jRmmqO13gKQD0Q/exec';
+            
+            const formData = new URLSearchParams();
+            formData.append('Nama', this.querySelector('input[type="text"]').value);
+            formData.append('Kehadiran', this.querySelector('select').value);
+            // Mengirim data kosong secara otomatis ke kolom Jumlah_Tamu dan Ucapan agar spreadsheet tidak bergeser/error
+            formData.append('Jumlah_Tamu', 0);
+            formData.append('Ucapan', '-');
+
+            fetch(urlBersih, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .then(response => {
+                alert('Terima kasih! Konfirmasi kehadiran Anda telah tersimpan di Google Sheets.');
+                document.getElementById('rsvpForm').reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Maaf, terjadi kesalahan saat mengirim data. Silakan coba lagi.');
+            })
+            .finally(() => {
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
